@@ -1,8 +1,12 @@
 #!/bin/sh
 
+indent() {
+  sed -u 's/^/       /'
+}
+
 cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
-if ! ./configure || ! make; then
+if ! ./configure | indent() || ! make | indent(); then
     exit 1
 fi
