@@ -1,9 +1,5 @@
 #!/bin/sh
 
-indent() {
-  sed -u 's/^/       /'
-}
-
 cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
