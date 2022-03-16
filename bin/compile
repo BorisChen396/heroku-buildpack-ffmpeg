@@ -1,8 +1,11 @@
 #!/bin/sh
 
+apt_cache_dir=$2/apt/cache
+apt_state_dir=$2/apt/state
+apt_options="-o debug::nolocking=true -o dir::cache=$apt_cache_dir -o dir::state=$apt_state_dir"
+if ! apt $apt_options update -y -qq; then exit 1; fi
+if ! apt $apt_options -y -qq -d install --reinstall yasm
 cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
-if ! ./configure; then
-    exit 1
-fi
+if ! ./configure; then exit 1; fi
