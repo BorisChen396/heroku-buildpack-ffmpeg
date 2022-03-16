@@ -5,7 +5,7 @@ indent() {
 }
 
 cd $1
-git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg |& indent
+git clone 'https://git.ffmpeg.org/ffmpeg.git' 'ffmpeg' |& indent
 cd ffmpeg
 if ! ./configure | indent; then
     exit 1
