@@ -9,8 +9,8 @@ for deb_pkg in $apt_cache_dir/archives/*.deb; do
     dpkg -x $deb_pkg $(dirname $0)/../
     echo "Extracted $(basename $deb_pkg)."
 done
-ls -R $(dirname $0)/../usr/lib
 export PATH=$PATH:$(dirname $0)/../usr/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(dirname $0)/../usr/lib/x86_64-linux-gnu
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
 if ! ./configure || ! make install DESTDIR=$1; then exit 1; fi
