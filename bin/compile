@@ -10,7 +10,7 @@ for deb_pkg in $apt_cache_dir/archives/*.deb; do
     echo "Extracted $(basename $deb_pkg)."
 done
 export PATH=$PATH:$(dirname $0)/../usr/bin
-cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
-if ! ./configure || ! make; then exit 1; fi
+if ! ./configure || ! make install DESTDIR=$1; then exit 1; fi
+cp -d $(dirname $0)/../.profile.d $1
