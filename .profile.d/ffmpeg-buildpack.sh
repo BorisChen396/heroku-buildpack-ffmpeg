@@ -1,1 +1,1 @@
-export PATH=$PATH:~/ffmpeg:~/usr/bin
+export PATH=$PATH:~/ffmpeg
