@@ -9,7 +9,8 @@ for deb_pkg in $apt_cache_dir/archives/*.deb; do
     dpkg -x $deb_pkg ../
     echo "Extracted $(basename $deb_pkg)."
 done
-PATH=$PATH:$(dirname $0)/../usr/bin
+export PATH=$PATH:$(dirname $0)/../usr/bin
+ls -R $(dirname $0)/../
 cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
