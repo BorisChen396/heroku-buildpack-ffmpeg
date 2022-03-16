@@ -5,9 +5,6 @@ indent() {
 }
 
 cd $1
-git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
+git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg | indent
 cd ffmpeg
-CONFIG_RESULT=$(./configure | indent)
-if [ $CONFIG_RESULT -ne 0 ]; then
-    exit 1
-fi
+./configure | indent
