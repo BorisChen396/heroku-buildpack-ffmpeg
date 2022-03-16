@@ -7,6 +7,6 @@ indent() {
 cd $1
 git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
 cd ffmpeg
-if ! ./configure > indent(); then
+if ! ./configure | indent; then
     exit 1
 fi
