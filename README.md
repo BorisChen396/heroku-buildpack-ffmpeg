@@ -2,7 +2,7 @@
 
 A FFmpeg buildpack for Heroku.
 
-**⚠️ Warning: As this buildpack clones the FFmpeg source code and builds it every time you build the app, using this buildpack will make the app's build time much longer!**
+**⚠️ Warning: As this buildpack builds the FFmpeg source code when the app is built, using this buildpack will make the app's build time much longer!**
 
 ## How to use
 
