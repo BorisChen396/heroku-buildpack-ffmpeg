@@ -1,17 +1,22 @@
-#!/bin/sh
+#!/bin/bash
+
+indent() {
+    sed -u 's/^/       /'
+}
 
 apt_cache_dir=$2/apt/cache
 apt_state_dir=$2/apt/state
 apt_options="-o debug::nolocking=true -o dir::cache=$apt_cache_dir -o dir::state=$apt_state_dir"
-if ! apt $apt_options update -y -qq; then exit 1; fi
-if ! apt $apt_options -y -qq -d install --reinstall yasm; then exit 1; fi
+(apt $apt_options update -y -qq || exit 1) | indent
+(apt $apt_options -y -qq -d install --reinstall yasm || exit 1) | indent
 for deb_pkg in $apt_cache_dir/archives/*.deb; do
     dpkg -x $deb_pkg $(dirname $0)/../
     echo "Extracted $(basename $deb_pkg)."
 done
 export PATH=$PATH:$(dirname $0)/../usr/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(dirname $0)/../usr/lib/x86_64-linux-gnu
-git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg
+(git clone https://git.ffmpeg.org/ffmpeg.git ffmpeg || exit 1) |& indent
 cd ffmpeg
-if ! ./configure || ! make install DESTDIR=$1; then exit 1; fi
+(./configure || exit 1) | indent
+(make install DESTDIR=$1 || exit 1) | indent
 cp $(dirname $0)/../.profile.d/*.* $1/.profile.d
